@@ -1,0 +1,43 @@
+<% content_for :title, t("inventories.index_title") %>
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+  <div>
+    <h1 class="h2 mb-1"><%= t("inventories.index_title") %></h1>
+    <p class="text-body-secondary mb-0"><%= t("inventories.total", count: @inventory_count) %></p>
+  </div>
+  <% if user_signed_in? %>
+    <%= link_to new_inventory_path, class: "btn btn-primary" do %>
+      <%= icon("plus") %> <%= t("inventories.add") %>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="card">
+  <% if @inventories.any? %>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead>
+          <tr>
+            <%= sortable_th t("inventories.name"), "title", current_sort: @sort, current_direction: @direction %>
+            <%= sortable_th t("inventories.category"), "category", current_sort: @sort, current_direction: @direction %>
+            <%= sortable_th t("inventories.creator"), "creator", current_sort: @sort, current_direction: @direction %>
+            <%= sortable_th t("inventories.items_count"), "items_count", current_sort: @sort, current_direction: @direction %>
+            <%= sortable_th t("inventories.created"), "created_at", current_sort: @sort, current_direction: @direction %>
+          </tr>
+        </thead>
+        <tbody>
+          <% @inventories.each do |inventory| %>
+            <tr data-href="<%= inventory_path(inventory) %>">
+              <td><%= link_to inventory.title, inventory_path(inventory), class: "fw-semibold" %></td>
+              <td><%= inventory.category.name %></td>
+              <td><%= inventory.creator.name %></td>
+              <td><%= inventory.items_count %></td>
+              <td><%= l(inventory.created_at, format: :short) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="card-body text-body-secondary"><%= t("inventories.empty") %></div>
+  <% end %>
+</div>

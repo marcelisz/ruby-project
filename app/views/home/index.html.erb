@@ -1,0 +1,91 @@
+<% content_for :title, t("home.title") %>
+
+<section class="card mb-4">
+  <div class="card-header d-flex justify-content-between align-items-center gap-3">
+    <h2 class="h5 mb-0"><%= t("home.latest") %></h2>
+    <%= link_to t("home.view_all"), inventories_path, class: "btn btn-sm btn-outline-primary" %>
+  </div>
+  <% if @latest_inventories.any? %>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead>
+          <tr>
+            <th scope="col"><%= t("inventories.name") %></th>
+            <th scope="col"><%= t("inventories.description") %></th>
+            <th scope="col"><%= t("inventories.creator") %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @latest_inventories.each do |inventory| %>
+            <tr data-href="<%= inventory_path(inventory) %>">
+              <td><%= link_to inventory.title, inventory_path(inventory), class: "fw-semibold" %></td>
+              <td>
+                <% if inventory.image_url.present? %>
+                  <%= image_tag inventory.image_url, alt: inventory.title, width: 96, height: 64,
+                                class: "img-thumbnail object-fit-cover" %>
+                <% elsif inventory.description.present? %>
+                  <span class="text-body-secondary"><%= plain_markdown(inventory.description) %></span>
+                <% else %>
+                  <span class="text-body-secondary fst-italic"><%= t("common.no_description") %></span>
+                <% end %>
+              </td>
+              <td><%= link_to inventory.creator.name, user_path(inventory.creator) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="card-body text-body-secondary"><%= t("home.no_inventories") %></div>
+  <% end %>
+</section>
+
+<div class="row g-4">
+  <div class="col-lg-7">
+    <section class="card h-100">
+      <div class="card-header"><h2 class="h5 mb-0"><%= t("home.popular") %></h2></div>
+      <% if @popular_inventories.any? %>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead>
+              <tr>
+                <th scope="col"><%= t("inventories.name") %></th>
+                <th scope="col"><%= t("inventories.creator") %></th>
+                <th scope="col" class="text-end"><%= t("inventories.items_count") %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @popular_inventories.each do |inventory| %>
+                <tr data-href="<%= inventory_path(inventory) %>">
+                  <td><%= link_to inventory.title, inventory_path(inventory), class: "fw-semibold" %></td>
+                  <td><%= link_to inventory.creator.name, user_path(inventory.creator) %></td>
+                  <td class="text-end"><span class="badge text-bg-primary"><%= inventory.items_count %></span></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% else %>
+        <div class="card-body text-body-secondary"><%= t("home.no_inventories") %></div>
+      <% end %>
+    </section>
+  </div>
+
+  <div class="col-lg-5">
+    <section class="card h-100">
+      <div class="card-header"><h2 class="h5 mb-0"><%= t("home.tags") %></h2></div>
+      <div class="card-body">
+        <% if @tags.any? %>
+          <div class="d-flex flex-wrap align-items-center gap-2">
+            <% @tags.each do |tag| %>
+              <%= link_to tag.name, tag_path(tag),
+                          class: "badge text-bg-primary text-decoration-none #{tag_size_class(tag.taggings_count, @max_tag_count)}" %>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="text-body-secondary mb-0"><%= t("home.no_tags") %></p>
+        <% end %>
+      </div>
+    </section>
+  </div>
+</div>

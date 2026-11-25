@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>" data-bs-theme="<%= current_theme %>">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title><%= content_for(:title) ? "#{content_for(:title)} · #{t('app_name')}" : t("app_name") %></title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "bootstrap.min", "application", media: "all" %>
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  </head>
+  <body class="d-flex align-items-center justify-content-center min-vh-100 bg-body py-4">
+    <%= render "layouts/icons" %>
+    <main class="container">
+      <%= render "layouts/flash" %>
+      <%= yield %>
+    </main>
+    <%= javascript_include_tag "bootstrap.bundle.min", "application" %>
+  </body>
+</html>

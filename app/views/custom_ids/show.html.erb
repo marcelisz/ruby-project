@@ -1,0 +1,60 @@
+<% content_for :title, "#{@inventory.title} · #{t('tabs.custom_id')}" %>
+<%= render "inventories/header", inventory: @inventory %>
+<%= render "inventories/tabs", inventory: @inventory, active: :custom_id %>
+
+<% builder_config = {
+  labels: CustomIdFormat::TYPES.to_h { |type| [type, t("custom_id.types.#{type}")] },
+  helps: CustomIdFormat::TYPES.to_h { |type| [type, t("custom_id.help.#{type}")] },
+  labelsUi: {
+    text: t("custom_id.text"), padding: t("custom_id.padding"), format: t("custom_id.format"),
+    remove: t("common.delete"), help: t("common.help"), drag: t("custom_id.drag"),
+    example: t("custom_id.example")
+  }
+}.merge(CustomIdFormat.builder_config) %>
+<div class="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-3">
+  <div>
+    <h2 class="h4 mb-1"><%= t("custom_id.title") %></h2>
+    <p class="text-body-secondary mb-0"><%= t("custom_id.intro") %></p>
+  </div>
+  <button type="button" class="btn btn-outline-secondary" data-bs-toggle="popover"
+          data-bs-title="<%= t("custom_id.help_title") %>"
+          data-bs-content="<%= t("custom_id.help_text") %>">
+    <%= t("common.help") %>
+  </button>
+</div>
+
+<%= render "shared/errors", object: @inventory %>
+
+<div class="alert alert-info" role="alert">
+  <div class="fw-semibold mb-1"><%= t("custom_id.live_example") %></div>
+  <code class="fs-5" data-custom-id-preview><%= @inventory.custom_id_formatter.example(sequence: @next_sequence) %></code>
+</div>
+
+<%= form_with model: @inventory, url: custom_id_inventory_path(@inventory), method: :patch,
+              local: true,
+              html: { data: { custom_id_builder: true,
+                              builder_config: builder_config.to_json, next_sequence: @next_sequence } } do %>
+  <%= hidden_field_tag "inventory[lock_version]", @inventory.lock_version if @inventory.persisted? %>
+  <%= hidden_field_tag "inventory[custom_id_format]", @inventory.custom_id_format.to_json, id: "custom-id-format" %>
+
+  <div class="mb-3">
+    <div class="d-flex flex-wrap gap-2 align-items-center">
+      <label for="custom-id-type" class="form-label mb-0"><%= t("custom_id.add_element") %></label>
+      <select id="custom-id-type" class="form-select w-auto">
+        <% CustomIdFormat::TYPES.each do |type| %>
+          <option value="<%= type %>"><%= t("custom_id.types.#{type}") %></option>
+        <% end %>
+      </select>
+      <button type="button" class="btn btn-outline-primary" data-custom-id-add>
+        <%= icon("plus") %> <%= t("common.add") %>
+      </button>
+    </div>
+  </div>
+
+  <div class="vstack gap-2 mb-3" data-custom-id-list></div>
+
+  <div class="d-flex align-items-center gap-3">
+    <%= submit_tag t("common.save"), class: "btn btn-primary" %>
+    <span class="small text-body-secondary" data-custom-id-count></span>
+  </div>
+<% end %>

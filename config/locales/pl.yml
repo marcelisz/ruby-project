@@ -1,0 +1,398 @@
+pl:
+  app_name: "Inventory Management"
+  languages:
+    en: English
+    pl: Polski
+  roles:
+    admin: Administrator
+    user: Użytkownik
+  common:
+    add: Dodaj
+    cancel: Anuluj
+    close: Zamknij
+    delete: Usuń
+    edit: Edytuj
+    errors:
+      one: "Popraw następujący błąd:"
+      few: "Popraw następujące błędy:"
+      many: "Popraw następujące błędy:"
+      other: "Popraw następujące błędy:"
+    help: Pomoc
+    no_description: "Opis niedostępny"
+    none: Brak
+    "no": "Nie"
+    save: Zapisz
+    deleted_user: "Usunięty użytkownik"
+    "yes": "Tak"
+  auth:
+    title: "Zaloguj się"
+    intro: "Zaloguj się poprzez konto jednego z poniższych dostawców."
+    registration_note: "Konto zostanie utworzone automatycznie przy pierwszym logowaniu."
+    continue_with: "Kontynuuj z %{provider}"
+    providers:
+      google_oauth2: Google
+      facebook: Facebook
+      github: GitHub
+    failure: "Uwierzytelnianie nie powiodło się. Spróbuj ponownie."
+    blocked: "Twoje konto zostało zablokowane."
+    success: "Zalogowano pomyślnie."
+    signed_out: "Wylogowano pomyślnie."
+  header:
+    search: Szukaj
+    search_placeholder: "Szukaj inwentarzy, przedmiotów i użytkowników"
+    settings: Ustawienia
+    language: Język
+    dark_mode: "Tryb ciemny"
+    profile: Profil
+    admin_dashboard: "Panel administratora"
+    log_out: "Wyloguj się"
+    log_in: "Zaloguj się"
+  home:
+    title: "Strona główna"
+    latest: "Najnowsze inwentarze"
+    view_all: "Zobacz wszystkie inwentarze"
+    no_inventories: "Nie utworzono jeszcze żadnego inwentarza."
+    popular: "5 najpopularniejszych inwentarzy"
+    tags: "Popularne tagi"
+    no_tags: "Nie ma jeszcze żadnych tagów."
+  inventories:
+    index_title: Inwentarze
+    name: Nazwa
+    title: Tytuł
+    description: Opis
+    category: Kategoria
+    creator: Twórca
+    created_by: "Utworzone przez"
+    created: Utworzono
+    updated: Zaktualizowano
+    items_count: Przedmioty
+    items_count_value:
+      one: "%{count} przedmiot"
+      few: "%{count} przedmioty"
+      many: "%{count} przedmiotów"
+      other: "%{count} przedmiotu"
+    total:
+      one: "%{count} inwentarz"
+      few: "%{count} inwentarze"
+      many: "%{count} inwentarzy"
+      other: "%{count} inwentarza"
+    add: "Dodaj inwentarz"
+    new_title: "Nowy inwentarz"
+    create: "Utwórz inwentarz"
+    empty: "Nie utworzono jeszcze żadnego inwentarza."
+    public: Publiczny
+    private: Prywatny
+    tags: Tagi
+    tags_placeholder: "Dodaj tagi..."
+    image: Obraz
+    upload_image: "Prześlij obraz"
+    upload_unavailable: "Przesyłanie obrazów jest niedostępne. Wklej adres URL obrazu."
+    delete_confirm: "Usunąć ten inwentarz wraz ze wszystkimi zawartymi w nim przedmiotami?"
+  tabs:
+    items: Przedmioty
+    chat: Czat
+    settings: Ustawienia
+    custom_id: "Własny ID"
+    fields: Pola
+    access: Dostęp
+    stats: Statystyki
+    export: Eksport
+  autosave:
+    saving: "Zapisywanie..."
+    saved: Zapisano
+    error: "Nie udało się zapisać zmian."
+    conflict: "Ten inwentarz został zmodyfikowany przez inną osobę. Odśwież stronę przed ponownym zapisem."
+  settings:
+    title: "Ustawienia inwentarza"
+    delete_title: "Usuń inwentarz"
+    delete_hint: "Spowoduje to trwałe usunięcie inwentarza, zawartych w nim przedmiotów i czatu."
+    delete: "Usuń inwentarz"
+    delete_confirm: "Usunąć ten inwentarz wraz ze wszystkimi zawartymi w nim przedmiotami?"
+  export:
+    title: "Eksportuj inwentarz"
+    intro: "Wyeksportuj zawartość inwentarza wraz z wartościami pól przedmiotów do arkusza kalkulacyjnego lub pliku CSV."
+    download_xlsx: "Pobierz XLSX"
+    download_csv: "Pobierz CSV"
+    sheet_name: Przedmioty
+    headers:
+      custom_id: "Własny ID"
+      created_by: "Utworzone przez"
+      created_at: Utworzono
+      likes: Polubienia
+  items:
+    total:
+      one: "%{count} przedmiot"
+      few: "%{count} przedmioty"
+      many: "%{count} przedmiotów"
+      other: "%{count} przedmiotu"
+    add: "Dodaj przedmiot"
+    delete: "Usuń zaznaczone"
+    select_all: "Zaznacz wszystkie przedmioty"
+    custom_id: "Własny ID"
+    custom_id_hint: "Pozostaw pole puste, aby wygenerować ID automatycznie, np. %{example}."
+    created_by: "Utworzone przez"
+    created_at: Utworzono
+    likes: Polubienia
+    likes_count:
+      one: "%{count} polubienie"
+      few: "%{count} polubienia"
+      many: "%{count} polubień"
+      other: "%{count} polubienia"
+    like: Polub
+    liked: Polubiono
+    empty: "Ten inwentarz nie ma jeszcze żadnych przedmiotów."
+    new_title: "Nowy przedmiot"
+    delete_confirm: "Usunąć zaznaczone przedmioty?"
+    no_fields: "Ten inwentarz nie ma jeszcze własnych pól."
+    back_to_inventory: "Wróć do inwentarza"
+  fields:
+    title: Pola
+    limits: "Maksymalnie 3 pola jednego typu. Przeciągnij pole, aby zmienić kolejność."
+    title_label: Tytuł
+    type: Typ
+    description: Opis
+    show_in_table: "Pokaż w tabeli"
+    min_length: "Minimalna długość"
+    max_length: "Maksymalna długość"
+    min_digits: "Minimalna liczba cyfr"
+    max_digits: "Maksymalna liczba cyfr"
+    min_value: "Wartość minimalna"
+    max_value: "Wartość maksymalna"
+    regex_pattern: "Wyrażenie regularne (regex)"
+    add: "Dodaj pole"
+    new_field: "Nowe pole"
+    drag: "Przeciągnij, aby zmienić kolejność"
+    position: "Pozycja %{position}"
+    delete_confirm: "Usunąć to pole? Wartości pozostaną w bazie, ale będą ukryte."
+    usage: "Limity pól"
+    used:
+      one: "%{count} z %{limit}"
+      few: "%{count} z %{limit}"
+      many: "%{count} z %{limit}"
+      other: "%{count} z %{limit}"
+    types:
+      single_line_text: "Tekst jednolinijkowy"
+      multi_line_text: "Tekst wielolinijkowy"
+      number: Liczba
+      document: "Link do dokumentu/obrazu"
+      image: Obraz
+      boolean: "Tak/nie"
+  custom_id:
+    title: "Własny ID"
+    intro: "Stwórz własny format ID dla przedmiotów w tym inwentarzu. ID generowane jest automatycznie dla każdego nowego przedmiotu, jego format możesz później edytować."
+    help_title: "Jak działają własne ID"
+    help_text: "Elementy są łączone od lewej do prawej. Przeciągnij karty, aby zmienić kolejność, albo przeciągnij kartę poza listę, aby ją usunąć. Na podglądzie powyżej możesz sprawdzić, jak będzie wyglądało generowane ID przed zapisaniem zmian; identyfikator jest generowany dla każdego przedmiotu podczas jego dodawania."
+    live_example: "Podgląd na żywo"
+    add_element: "Dodaj element"
+    text: "Tekst"
+    padding: "Dopełnienie (cyfry)"
+    format: "Format daty i czasu"
+    drag: "Przeciągnij, aby zmienić kolejność"
+    example: Przykład
+    types:
+      text: "Tekst"
+      random20: "Losowa liczba 20-bitowa"
+      random32: "Losowa liczba 32-bitowa"
+      random6: "Losowa liczba 6-cyfrowa"
+      random9: "Losowa liczba 9-cyfrowa"
+      guid: GUID
+      datetime: "Data i czas utworzenia"
+      sequence: Sekwencja
+    help:
+      text: "Dowolny statyczny tekst Unicode, np. LAP-."
+      random20: "Losowa liczba od 0 do 1 048 575. Dopełnienie dodaje zera z przodu."
+      random32: "Losowa liczba od 0 do 4 294 967 295. Dopełnienie dodaje zera z przodu."
+      random6: "Losowa liczba od 000000 do 999999."
+      random9: "Losowa liczba od 000000000 do 999999999."
+      guid: "Losowy uniwersalny unikalny identyfikator (UUID)."
+      datetime: "Data i czas utworzenia. Obsługiwane znaczniki: %Y, %y, %m, %d, %H, %M, %S oraz %% oznaczający znak procentu."
+      sequence: "Największa wartość sekwencji w tym inwentarzu powiększona o jeden. Dopełnienie dodaje zera z przodu."
+  access:
+    public_title: "Widoczność i dostęp"
+    public: "Publiczny inwentarz"
+    public_hint: "W publicznym inwentarzu każdy zalogowany użytkownik może dodawać, edytować i usuwać przedmioty. Tylko twórca i administratorzy mogą zmieniać ustawienia inwentarza."
+    add_user: "Dodaj użytkownika"
+    user: Użytkownik
+    autocomplete_placeholder: "Wpisz nazwę użytkownika lub adres e-mail"
+    list_title: "Użytkownicy z dostępem"
+    sort_by_name: "Według nazwy"
+    sort_by_email: "Według adresu e-mail"
+    name: Nazwa
+    email: E-mail
+    actions: Akcje
+    remove: "Usuń dostęp"
+    remove_confirm: "Odebrać dostęp do inwentarza temu użytkownikowi?"
+    empty: "Nie przyznano jeszcze dostępu żadnemu użytkownikowi."
+  stats:
+    title: "Statystyki inwentarza"
+    items: Przedmioty
+    likes: Polubienia
+    entries: "Liczba wartości"
+    average: Średnia
+    minimum: Minimum
+    maximum: Maksimum
+    links_provided:
+      one: "%{count} link"
+      few: "%{count} linki"
+      many: "%{count} linków"
+      other: "%{count} linku"
+    images_provided:
+      one: "%{count} obraz"
+      few: "%{count} obrazy"
+      many: "%{count} obrazów"
+      other: "%{count} obrazu"
+    no_values: "Nie dodano jeszcze żadnych wartości."
+    no_fields: "Dodaj własne pola, aby zobaczyć statystyki ich wartości."
+  search:
+    title: "Wyniki wyszukiwania"
+    results_for: "Wyniki dla „%{query}”"
+    no_results: "Nie znaleziono wyników."
+    inventories: Inwentarze
+    items: Przedmioty
+    users: Użytkownicy
+  tags:
+    inventories:
+      one: "%{count} inwentarz z tym tagiem"
+      few: "%{count} inwentarze z tym tagiem"
+      many: "%{count} inwentarzy z tym tagiem"
+      other: "%{count} inwentarza z tym tagiem"
+  chat:
+    new_post: "Nowy post"
+    placeholder: "Napisz wiadomość."
+    post: Opublikuj
+    empty: "Nie ma jeszcze żadnych postów. Rozpocznij dyskusję, dodając swój własny post."
+    login_to_post: "Zaloguj się, aby dołączyć do dyskusji."
+  profile:
+    owned: "Moje inwentarze"
+    owned_by: "Inwentarze użytkownika %{name}"
+    shared_me: "Inwentarze udostępnione mi przez użytkowników"
+    shared_by: "Inwentarze udostępnione użytkownikowi %{name}"
+    filter: "Filtruj według nazwy lub opisu"
+    filter_action: Filtruj
+    no_owned: "Ten użytkownik nie posiada żadnych inwentarzy."
+    no_owned_me: "Nie posiadasz żadnych inwentarzy."
+    no_shared: "Temu użytkownikowi nie udostępniono żadnych inwentarzy."
+    no_shared_me: "Nie udostępniono Ci żadnych inwentarzy."
+  admin:
+    title: "Panel administratora"
+    name: Nazwa
+    email: E-mail
+    role: Rola
+    status: Status
+    actions: Akcje
+    active: Aktywny
+    blocked: Zablokowany
+    block: Zablokuj
+    unblock: Odblokuj
+    make_admin: "Nadaj uprawnienia administratora"
+    remove_admin: "Odbierz uprawnienia administratora"
+    delete_confirm: "Usunąć tego użytkownika wraz ze wszystkimi jego inwentarzami?"
+    users:
+      blocked: "Użytkownik został zablokowany."
+      unblocked: "Użytkownik został odblokowany."
+      role_updated: "Rola użytkownika została zaktualizowana."
+      deleted: "Użytkownik został usunięty."
+  flash:
+    not_authorized: "Nie masz uprawnień do wykonania tej operacji."
+    inventory_created: "Inwentarz został utworzony."
+    inventory_updated: "Inwentarz został zaktualizowany."
+    inventory_deleted: "Inwentarz został usunięty."
+    item_created: "Przedmiot został utworzony."
+    item_updated: "Przedmiot został zaktualizowany."
+    no_items_selected: "Nie zaznaczono żadnych elementów."
+    items_deleted:
+      one: "Usunięto %{count} przedmiot."
+      few: "Usunięto %{count} przedmioty."
+      many: "Usunięto %{count} przedmiotów."
+      other: "Usunięto %{count} przedmiotu."
+    fields_updated: "Pola zostały zaktualizowane."
+    custom_id_updated: "Format własnego ID został zaktualizowany."
+    access_updated: "Ustawienia dostępu zostały zaktualizowane."
+    user_not_found: "Nie znaleziono użytkownika."
+    access_added: "Przyznano użytkownikowi dostęp do inwentarza."
+    already_has_access: "Ten użytkownik posiada już dostęp."
+    access_removed: "Odebrano użytkownikowi dostęp do inwentarza."
+    message_created: "Post został opublikowany."
+    liked: "Przedmiot został polubiony."
+    already_liked: "Polubiłeś już ten przedmiot."
+    conflict: "Rekord został zmieniony przez inną osobę. Odśwież stronę i spróbuj ponownie."
+  devise:
+    failure:
+      unauthenticated: "Zaloguj się, aby kontynuować."
+      already_authenticated: "Jesteś już zalogowany."
+      blocked: "Twoje konto zostało zablokowane."
+      invalid: "Nieprawidłowy e-mail lub hasło."
+      timeout: "Sesja wygasła. Zaloguj się ponownie."
+  activerecord:
+    models:
+      category: Kategoria
+      inventory: Inwentarz
+      inventory_field: Pole
+      item: Przedmiot
+      message: Post
+      user: Użytkownik
+    attributes:
+      user:
+        name: "Nazwa użytkownika"
+        email: E-mail
+      inventory:
+        title: Tytuł
+        description: Opis
+        category: Kategoria
+        image_url: Obraz
+        custom_id_format: "Format własnego ID"
+      inventory_field:
+        title: Tytuł
+        description: Opis
+        field_type: "Typ pola"
+        show_in_table: "Pokaż w tabeli"
+        min_length: "Minimalna długość"
+        max_length: "Maksymalna długość"
+        min_value: "Wartość minimalna"
+        max_value: "Wartość maksymalna"
+        regex_pattern: "Wyrażenie regularne"
+      item:
+        custom_id: "Własny ID"
+        field_values: Pola
+      message:
+        content: Post
+    errors:
+      models:
+        inventory:
+          attributes:
+            custom_id_format:
+              blank: "musi zawierać co najmniej jeden element"
+              too_many_elements: "nie może zawierać więcej niż %{max} elementów"
+              invalid_type: "element %{index} ma nieobsługiwany typ"
+              blank_text: "element %{index} wymaga stałego tekstu"
+              invalid_padding: "element %{index} wymaga dopełnienia od %{min} do %{max}"
+              invalid_datetime: "element %{index} ma nieobsługiwany format daty"
+              invalid: "jest nieprawidłowy"
+        inventory_field:
+          attributes:
+            field_type:
+              limit_reached: "nie może przekraczać %{limit} pól tego typu"
+            max_length:
+              must_be_greater_than_or_equal_to_min_length: "musi być większa lub równa minimalnej długości"
+            max_value:
+              must_be_greater_than_or_equal_to_min_value: "musi być większa lub równa minimalnej wartości"
+            regex_pattern:
+              invalid_database_pattern: "nie jest obsługiwane przez bazę danych"
+        item:
+          attributes:
+            custom_id:
+              invalid_format: "nie pasuje do formatu własnego ID tego inwentarza"
+              inventory_format_invalid: "nie można zweryfikować, ponieważ format własnego ID inwentarza jest nieprawidłowy"
+            field_values:
+              invalid_number: "zawiera nieprawidłową liczbę w polu %{field}"
+              too_short: "zawiera tekst krótszy niż %{limit} znaków w polu %{field}"
+              too_long: "zawiera tekst dłuższy niż %{limit} znaków w polu %{field}"
+              invalid_text_format: "zawiera tekst niezgodny z wymaganym formatem w polu %{field}"
+              too_few_digits: "zawiera liczbę mającą mniej niż %{limit} cyfr w polu %{field}"
+              too_many_digits: "zawiera liczbę mającą więcej niż %{limit} cyfr w polu %{field}"
+              below_minimum: "zawiera wartość mniejszą niż %{limit} w polu %{field}"
+              above_maximum: "zawiera wartość większą niż %{limit} w polu %{field}"
+  time:
+    formats:
+      short: "%d.%m.%Y %H:%M"
+      long: "%d.%m.%Y %H:%M:%S"

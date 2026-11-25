@@ -1,0 +1,77 @@
+<% content_for :title, "#{@inventory.title} · #{t('tabs.stats')}" %>
+<%= render "inventories/header", inventory: @inventory %>
+<%= render "inventories/tabs", inventory: @inventory, active: :stats %>
+
+<h2 class="h4 mb-3"><%= t("stats.title") %></h2>
+<div class="row g-3 mb-4">
+  <div class="col-sm-6">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="text-body-secondary"><%= t("stats.items") %></div>
+        <div class="fs-2 fw-semibold"><%= @item_data.size %></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="text-body-secondary"><%= t("stats.likes") %></div>
+        <div class="fs-2 fw-semibold"><%= @total_likes %></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if @statistics.any? %>
+  <div class="row g-3">
+    <% @statistics.each do |field, stats| %>
+      <div class="col-lg-6">
+        <div class="card h-100">
+          <div class="card-header d-flex justify-content-between align-items-center gap-2">
+            <h3 class="h5 mb-0"><%= field.title %></h3>
+            <span class="badge text-bg-secondary"><%= field_type_label(field.field_type) %></span>
+          </div>
+          <div class="card-body">
+            <% case field.field_type %>
+            <% when "number" %>
+              <dl class="row mb-0">
+                <dt class="col-6 fw-normal text-body-secondary"><%= t("stats.entries") %></dt>
+                <dd class="col-6 text-end"><%= stats[:count] %></dd>
+                <dt class="col-6 fw-normal text-body-secondary"><%= t("stats.average") %></dt>
+                <dd class="col-6 text-end"><%= stats[:average] ? display_stat_average(stats[:average]) : t("common.none") %></dd>
+                <dt class="col-6 fw-normal text-body-secondary"><%= t("stats.minimum") %></dt>
+                <dd class="col-6 text-end"><%= stats[:min] ? display_stat_number(stats[:min]) : t("common.none") %></dd>
+                <dt class="col-6 fw-normal text-body-secondary"><%= t("stats.maximum") %></dt>
+                <dd class="col-6 text-end"><%= stats[:max] ? display_stat_number(stats[:max]) : t("common.none") %></dd>
+              </dl>
+            <% when "boolean" %>
+              <div class="d-flex gap-2">
+                <span class="badge text-bg-success"><%= t("common.yes") %>: <%= stats[:true] %></span>
+                <span class="badge text-bg-secondary"><%= t("common.no") %>: <%= stats[:false] %></span>
+              </div>
+            <% when "document" %>
+              <p class="mb-0"><%= t("stats.links_provided", count: stats[:count]) %></p>
+            <% when "image" %>
+              <p class="mb-0"><%= t("stats.images_provided", count: stats[:count]) %></p>
+            <% else %>
+              <% if stats[:frequent].any? %>
+                <ul class="list-group list-group-flush">
+                  <% stats[:frequent].each do |value, count| %>
+                    <li class="list-group-item d-flex justify-content-between align-items-start gap-3 px-0">
+                      <span><%= value %></span>
+                      <span class="badge text-bg-secondary"><%= count %></span>
+                    </li>
+                  <% end %>
+                </ul>
+              <% else %>
+                <p class="text-body-secondary mb-0"><%= t("stats.no_values") %></p>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="alert alert-secondary"><%= t("stats.no_fields") %></div>
+<% end %>

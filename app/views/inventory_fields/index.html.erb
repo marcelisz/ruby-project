@@ -1,0 +1,94 @@
+<% content_for :title, "#{@inventory.title} · #{t('tabs.fields')}" %>
+<%= render "inventories/header", inventory: @inventory %>
+<%= render "inventories/tabs", inventory: @inventory, active: :fields %>
+
+<%= render "shared/errors", object: @new_field if @new_field.errors.any? %>
+<%= render "shared/errors", object: @field if @field&.errors&.any? %>
+
+<div data-controller="field-cards">
+  <%= form_with url: update_all_inventory_fields_path(@inventory), method: :patch, local: true do |batch_form| %>
+    <div class="row g-3 align-items-start mb-3">
+      <div class="col-12 col-md-10">
+        <h2 class="h4 mb-1"><%= t("fields.title") %></h2>
+        <p class="text-body-secondary mb-0"><%= t("fields.limits") %></p>
+      </div>
+      <div class="col-12 col-md-2">
+        <%= batch_form.submit t("common.save"), class: "btn btn-primary w-100" %>
+      </div>
+    </div>
+
+    <div class="vstack gap-3 mb-4" data-field-list data-field-cards-target="fieldList">
+      <% @fields.each_with_index do |field, index| %>
+        <% namespace = "inventory_fields[field_#{field.id}]" %>
+        <%= fields_for namespace, field do |f| %>
+          <%= render "inventory_fields/field_form", f: f, field: field,
+                     namespace: namespace, position: index %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="card">
+    <div class="card-header"><h2 class="h5 mb-0"><%= t("fields.add") %></h2></div>
+    <div class="card-body">
+      <%= form_with model: @new_field, url: "#", method: :post,
+                    local: true,
+                    html: { data: { add_field_form: true, field_cards_target: "addForm",
+                                    action: "submit->field-cards#preventSubmit" } } do |f| %>
+        <div class="row g-3 align-items-start">
+          <div class="col-md-4">
+            <%= f.label :title, t("fields.title_label"), class: "form-label" %>
+            <%= f.text_field :title, class: "form-control", required: true %>
+          </div>
+          <div class="col-md-3">
+            <%= f.label :field_type, t("fields.type"), class: "form-label" %>
+            <%= f.select :field_type, field_type_options, { include_blank: true }, class: "form-select",
+                         required: true, data: { field_type_select: true,
+                                                 action: "change->field-cards#syncTuning" } %>
+          </div>
+          <div class="col-md-3 d-flex align-items-end">
+            <div class="form-check mb-2">
+              <%= f.check_box :show_in_table, class: "form-check-input" %>
+              <%= f.label :show_in_table, t("fields.show_in_table"), class: "form-check-label" %>
+            </div>
+          </div>
+          <div class="col-md-2 d-flex align-items-end">
+            <button type="button" class="btn btn-primary w-100" data-add-field
+                    data-action="click->field-cards#add">
+              <%= t("common.add") %>
+            </button>
+          </div>
+          <div class="col-12">
+            <%= render "inventory_fields/tuning_fields", f: f, id_prefix: "add_inventory_field" %>
+          </div>
+          <div class="col-12">
+            <%= f.label :description, t("fields.description"), class: "form-label" %>
+            <%= f.text_area :description, class: "form-control", rows: 2 %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <template data-field-template data-field-cards-target="template">
+    <% namespace = "inventory_fields[new_template]" %>
+    <%= fields_for namespace, InventoryField.new do |f| %>
+      <%= render "inventory_fields/field_form", f: f, field: f.object,
+                 namespace: namespace, id_prefix: "field_template", position: 0 %>
+    <% end %>
+  </template>
+</div>
+
+<div class="card mt-4">
+  <div class="card-header"><h2 class="h5 mb-0"><%= t("fields.usage") %></h2></div>
+  <ul class="list-group list-group-flush">
+    <% InventoryField::TYPES.each do |type| %>
+      <li class="list-group-item d-flex justify-content-between">
+        <span><%= field_type_label(type) %></span>
+        <span class="badge text-bg-secondary">
+          <%= t("fields.used", count: @fields.count { |field| field.field_type == type }, limit: InventoryField::LIMIT) %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
+</div>

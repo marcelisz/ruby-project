@@ -1,0 +1,10 @@
+<% content_for :title, "##{@tag.name}" %>
+<h1 class="h2 mb-1">#<%= @tag.name %></h1>
+<p class="text-body-secondary mb-4"><%= t("tags.inventories", count: @inventories.size) %></p>
+
+<section class="card">
+  <div class="card-header">
+    <h2 class="h5 mb-0"><%= t("search.inventories") %></h2>
+  </div>
+  <%= render "search/inventory_results", inventories: @inventories %>
+</section>

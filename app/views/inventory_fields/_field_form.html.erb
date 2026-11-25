@@ -1,0 +1,57 @@
+<% prefix = local_assigns.fetch(:id_prefix) { field.persisted? ? dom_id(field) : "new_inventory_field" } %>
+<article class="card" data-field-card>
+  <div class="card-body">
+    <%= hidden_field_tag "#{namespace}[id]", field.id, id: nil, data: { field_id_input: true } %>
+    <%= hidden_field_tag "#{namespace}[_destroy]", "0", id: nil, data: { destroy_field: true } %>
+    <%= hidden_field_tag "#{namespace}[position]", local_assigns.fetch(:position, 0), id: nil,
+                         data: { field_position_input: true } %>
+
+    <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+      <button type="button" class="btn btn-sm btn-outline-secondary" data-drag-handle
+              aria-label="<%= t("fields.drag") %>" title="<%= t("fields.drag") %>">
+        <%= icon("grip") %>
+      </button>
+      <h3 class="h6 mb-0 me-auto" data-field-title><%= field.title.presence || t("fields.new_field") %></h3>
+      <span class="badge text-bg-secondary" data-field-type-badge>
+        <%= field.field_type.present? ? field_type_label(field.field_type) : t("fields.new_field") %>
+      </span>
+      <span class="badge text-bg-light">
+        <%= field.persisted? ? t("fields.position", position: field.position + 1) : t("fields.new_field") %>
+      </span>
+      <button type="button" class="btn btn-sm btn-outline-danger" data-remove-field
+              data-action="click->field-cards#remove">
+        <%= icon("trash") %> <%= t("common.delete") %>
+      </button>
+    </div>
+
+    <div class="row g-3 align-items-start">
+      <div class="col-md-4">
+        <%= f.label :title, t("fields.title_label"), for: "#{prefix}_title", class: "form-label" %>
+        <%= f.text_field :title, id: "#{prefix}_title", class: "form-control",
+                         required: true, data: { field_title_input: true } %>
+      </div>
+      <div class="col-md-3">
+        <%= f.label :field_type, t("fields.type"), for: "#{prefix}_field_type", class: "form-label" %>
+        <%= f.select :field_type, field_type_options, { include_blank: true },
+                     id: "#{prefix}_field_type", class: "form-select", required: true,
+                     data: { field_type_select: true,
+                             action: "change->field-cards#syncTuning" } %>
+      </div>
+      <div class="col-md-3 d-flex align-items-end">
+        <div class="form-check mb-2">
+          <%= f.check_box :show_in_table, id: "#{prefix}_show_in_table", class: "form-check-input" %>
+          <%= f.label :show_in_table, t("fields.show_in_table"),
+                      for: "#{prefix}_show_in_table", class: "form-check-label" %>
+        </div>
+      </div>
+      <div class="col-12">
+        <%= render "inventory_fields/tuning_fields", f: f, id_prefix: prefix %>
+      </div>
+      <div class="col-12">
+        <%= f.label :description, t("fields.description"),
+                    for: "#{prefix}_description", class: "form-label" %>
+        <%= f.text_area :description, id: "#{prefix}_description", class: "form-control", rows: 2 %>
+      </div>
+    </div>
+  </div>
+</article>

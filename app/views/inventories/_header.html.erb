@@ -1,0 +1,30 @@
+<div class="row g-4 align-items-start mb-4">
+  <div class="col-lg-8">
+    <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+      <h1 class="h2 mb-0"><%= inventory.title %></h1>
+      <span class="badge text-bg-secondary"><%= inventory.category.name %></span>
+      <span class="badge <%= inventory.public? ? "text-bg-success" : "text-bg-light" %>">
+        <%= inventory.public? ? t("inventories.public") : t("inventories.private") %>
+      </span>
+    </div>
+    <p class="text-body-secondary mb-3">
+      <%= t("inventories.created_by") %> <%= link_to inventory.creator.name, user_path(inventory.creator) %>
+      · <%= l(inventory.created_at, format: :short) %>
+    </p>
+    <% if inventory.description.present? %>
+      <div class="mb-3"><%= markdown(inventory.description) %></div>
+    <% end %>
+    <% if inventory.tags.any? %>
+      <div class="d-flex flex-wrap gap-2">
+        <% inventory.tags.each do |tag| %>
+          <%= link_to "##{tag.name}", tag_path(tag), class: "badge text-bg-primary text-decoration-none" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <% if inventory.image_url.present? %>
+    <div class="col-lg-4 text-lg-end">
+      <%= image_tag inventory.image_url, alt: inventory.title, class: "img-fluid img-thumbnail" %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,53 @@
+<% content_for :title, t("admin.title") %>
+<h1 class="h2 mb-4"><%= t("admin.title") %></h1>
+
+<div class="card">
+  <div class="table-responsive">
+    <table class="table align-middle mb-0">
+      <thead>
+        <tr>
+          <th scope="col"><%= t("admin.name") %></th>
+          <th scope="col"><%= t("admin.email") %></th>
+          <th scope="col"><%= t("admin.role") %></th>
+          <th scope="col"><%= t("admin.status") %></th>
+          <th scope="col" class="text-end"><%= t("admin.actions") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= link_to user.name, user_path(user), class: "fw-semibold" %></td>
+            <td><%= user.email %></td>
+            <td>
+              <span class="badge <%= user.admin? ? "text-bg-primary" : "text-bg-secondary" %>">
+                <%= user.role_name %>
+              </span>
+            </td>
+            <td>
+              <span class="badge <%= user.blocked? ? "text-bg-danger" : "text-bg-success" %>">
+                <%= user.blocked? ? t("admin.blocked") : t("admin.active") %>
+              </span>
+            </td>
+            <td class="text-end">
+              <div class="d-flex flex-wrap justify-content-end gap-1">
+                <%= button_to user.admin? ? t("admin.remove_admin") : t("admin.make_admin"),
+                              toggle_admin_admin_user_path(user), method: :patch,
+                              class: "btn btn-sm btn-outline-secondary", form_class: "m-0" %>
+                <% if user.blocked? %>
+                  <%= button_to t("admin.unblock"), unblock_admin_user_path(user), method: :patch,
+                                class: "btn btn-sm btn-outline-success", form_class: "m-0" %>
+                <% else %>
+                  <%= button_to t("admin.block"), block_admin_user_path(user), method: :patch,
+                                class: "btn btn-sm btn-outline-warning", form_class: "m-0" %>
+                <% end %>
+                <%= button_to t("common.delete"), admin_user_path(user), method: :delete,
+                              class: "btn btn-sm btn-outline-danger", form_class: "m-0",
+                              form: { data: { confirm: t("admin.delete_confirm") } } %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

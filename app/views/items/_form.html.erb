@@ -1,0 +1,81 @@
+<% form_url = item.persisted? ? inventory_item_path(inventory, item) : inventory_items_path(inventory) %>
+<% cloudinary_widget_script if fields.any? { |field| field.field_type == "image" } %>
+<%= form_with model: item, url: form_url, method: item.persisted? ? :patch : :post, local: true do |f| %>
+  <%= hidden_field_tag "item[lock_version]", item.lock_version if item.persisted? %>
+  <%= render "shared/errors", object: item %>
+
+  <div class="row g-3 mb-4">
+    <div class="col-md-6">
+      <%= f.label :custom_id, t("items.custom_id"), class: "form-label" %>
+      <%= f.text_field :custom_id, class: "form-control", required: item.persisted? %>
+      <div class="form-text"><%= t("items.custom_id_hint", example: inventory.custom_id_formatter.example(sequence: inventory.next_custom_sequence)) %></div>
+    </div>
+    <div class="col-md-6">
+      <div class="small text-body-secondary"><%= t("items.created_by") %></div>
+      <div class="mb-2"><%= display_name(item.persisted? ? item.created_by : current_user) %></div>
+      <div class="small text-body-secondary"><%= t("items.created_at") %></div>
+      <div><%= l(item.created_at || Time.current, format: :short) %></div>
+    </div>
+  </div>
+
+  <% if fields.any? %>
+    <div class="vstack gap-3">
+      <% fields.each do |field| %>
+        <% input_id = "item_field_#{field.id}" %>
+        <div>
+          <% if field.field_type == "boolean" %>
+            <div class="form-check">
+              <%= hidden_field_tag "item[field_values][#{field.id}]", "0" %>
+              <%= check_box_tag "item[field_values][#{field.id}]", "1",
+                                ActiveModel::Type::Boolean.new.cast(item.value_for(field)),
+                                id: input_id, class: "form-check-input" %>
+              <%= label_tag input_id, field.title, class: "form-check-label" %>
+            </div>
+          <% else %>
+            <%= label_tag input_id, field.title, class: "form-label" %>
+            <% case field.field_type %>
+            <% when "single_line_text" %>
+              <%= text_field_tag "item[field_values][#{field.id}]", item.value_for(field),
+                                 id: input_id, class: "form-control",
+                                 minlength: field.min_length, maxlength: field.max_length %>
+            <% when "multi_line_text" %>
+              <%= text_area_tag "item[field_values][#{field.id}]", item.value_for(field),
+                                id: input_id, class: "form-control", rows: 4,
+                                minlength: field.min_length, maxlength: field.max_length %>
+            <% when "number" %>
+              <%= number_field_tag "item[field_values][#{field.id}]", Item.normalize_number(item.value_for(field)),
+                                   id: input_id, class: "form-control", step: "any",
+                                   min: field.min_value, max: field.max_value %>
+            <% when "image" %>
+              <% image_url = safe_http_url(item.value_for(field)) %>
+              <div class="input-group">
+                <%= url_field_tag "item[field_values][#{field.id}]", item.value_for(field),
+                                  id: input_id, class: "form-control", placeholder: "https://..." %>
+                <%= cloudinary_upload_button(input_id: input_id, preview_id: "#{input_id}_preview") %>
+              </div>
+              <%= image_tag image_url.presence || CloudinaryHelper::TRANSPARENT_PIXEL,
+                            alt: field.title, id: "#{input_id}_preview",
+                            class: "img-thumbnail mt-2 #{'d-none' unless image_url.present?}",
+                            width: 240, loading: "lazy" %>
+            <% when "document" %>
+              <%= url_field_tag "item[field_values][#{field.id}]", item.value_for(field),
+                                id: input_id, class: "form-control", placeholder: "https://..." %>
+            <% end %>
+          <% end %>
+          <% if field.description.present? %>
+            <div class="form-text"><%= field.description %></div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-body-secondary"><%= t("items.no_fields") %></p>
+  <% end %>
+
+  <div class="d-flex gap-2 mt-4">
+    <%= f.submit t("common.save"), class: "btn btn-primary" %>
+    <%= link_to t("common.cancel"),
+                item.persisted? ? inventory_item_path(inventory, item) : inventory_path(inventory),
+                class: "btn btn-outline-secondary" %>
+  </div>
+<% end %>

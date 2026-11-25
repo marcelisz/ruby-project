@@ -1,0 +1,36 @@
+<ul class="nav nav-tabs mb-4">
+  <li class="nav-item">
+    <%= link_to t("tabs.items"), inventory_path(inventory),
+                class: "nav-link #{'active' if active == :items}" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to t("tabs.chat"), chat_inventory_path(inventory),
+                class: "nav-link #{'active' if active == :chat}" %>
+  </li>
+  <% if inventory.manageable_by?(current_user) %>
+    <li class="nav-item">
+      <%= link_to t("tabs.settings"), edit_inventory_path(inventory),
+                  class: "nav-link #{'active' if active == :settings}" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to t("tabs.custom_id"), custom_id_inventory_path(inventory),
+                  class: "nav-link #{'active' if active == :custom_id}" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to t("tabs.fields"), inventory_fields_path(inventory),
+                  class: "nav-link #{'active' if active == :fields}" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to t("tabs.access"), access_inventory_path(inventory),
+                  class: "nav-link #{'active' if active == :access}" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to t("tabs.stats"), stats_inventory_path(inventory),
+                  class: "nav-link #{'active' if active == :stats}" %>
+    </li>
+    <li class="nav-item">
+      <%= link_to t("tabs.export"), export_inventory_path(inventory),
+                  class: "nav-link #{'active' if active == :export}" %>
+    </li>
+  <% end %>
+</ul>

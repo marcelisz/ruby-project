@@ -1,0 +1,10 @@
+<%= form_with url: search_path, method: :get, class: local_assigns.fetch(:form_class, "d-flex"), local: true, role: "search" do %>
+  <div class="input-group">
+    <%= text_field_tag :q, params[:q], id: local_assigns.fetch(:input_id, "q"), class: "form-control",
+                       placeholder: t("header.search_placeholder"), "aria-label": t("header.search") %>
+    <%= button_tag type: "submit", name: nil, class: "btn btn-outline-secondary" do %>
+      <%= icon("search") %>
+      <span class="visually-hidden"><%= t("header.search") %></span>
+    <% end %>
+  </div>
+<% end %>

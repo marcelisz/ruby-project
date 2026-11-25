@@ -1,0 +1,35 @@
+<% content_for :title, @user.name %>
+<div class="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-4">
+  <div>
+    <h1 class="h2 mb-1"><%= @user.name %></h1>
+    <p class="text-body-secondary mb-1"><%= @user.role_name %></p>
+    <% if @own_profile || current_user&.admin? %>
+      <p class="text-body-secondary mb-0"><%= @user.email %></p>
+    <% end %>
+  </div>
+</div>
+
+<%= render InventoryTableComponent.new(
+  user: @user,
+  inventories: @owned_inventories,
+  title: @own_profile ? t("profile.owned") : t("profile.owned_by", name: @user.name),
+  sort_prefix: :owned,
+  params: params,
+  query: params[:owned_q],
+  empty_text: @own_profile ? t("profile.no_owned_me") : t("profile.no_owned"),
+  show_creator: false,
+  manage_actions: @own_profile,
+  add_inventory: @own_profile,
+  section_class: "card mb-4"
+) %>
+
+<%= render InventoryTableComponent.new(
+  user: @user,
+  inventories: @shared_inventories,
+  title: @own_profile ? t("profile.shared_me") : t("profile.shared_by", name: @user.name),
+  sort_prefix: :shared,
+  params: params,
+  query: params[:shared_q],
+  empty_text: @own_profile ? t("profile.no_shared_me") : t("profile.no_shared"),
+  show_creator: true
+) %>

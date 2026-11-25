@@ -1,0 +1,19 @@
+<% messages.each do |message| %>
+  <article class="card mb-3" id="message-<%= message.id %>">
+    <div class="card-body">
+      <header class="d-flex flex-wrap justify-content-between gap-2 mb-2">
+        <div class="fw-semibold">
+          <% if message.user %>
+            <%= link_to message.user.name, user_path(message.user) %>
+          <% else %>
+            <span class="text-body-secondary"><%= t("common.deleted_user") %></span>
+          <% end %>
+        </div>
+        <time class="text-body-secondary small" datetime="<%= message.created_at.iso8601 %>">
+          <%= l(message.created_at, format: :short) %>
+        </time>
+      </header>
+      <div><%= markdown(message.content) %></div>
+    </div>
+  </article>
+<% end %>

@@ -1,0 +1,68 @@
+<section class="<%= section_class %>">
+  <div class="<%= header_class %>">
+    <h2 class="h5 mb-0"><%= title %></h2>
+    <% if add_inventory? %>
+      <%= helpers.link_to helpers.new_inventory_path, class: "btn btn-sm btn-primary" do %>
+        <%= helpers.icon("plus") %> <%= helpers.t("inventories.add") %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="card-body border-bottom">
+    <%= helpers.form_with url: helpers.user_path(user), method: :get, local: true, class: "d-flex gap-2" do %>
+      <%= helpers.text_field_tag query_param, query, class: "form-control", placeholder: helpers.t("profile.filter") %>
+      <%= helpers.submit_tag helpers.t("profile.filter_action"), class: "btn btn-outline-secondary" %>
+    <% end %>
+  </div>
+  <% if inventories.any? %>
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead>
+          <tr>
+            <%= helpers.sortable_th helpers.t("inventories.name"), "title",
+                                    current_sort: current_sort, current_direction: current_direction,
+                                    sort_param: sort_param, direction_param: direction_param %>
+            <% if show_creator? %>
+              <%= helpers.sortable_th helpers.t("inventories.creator"), "creator",
+                                      current_sort: current_sort, current_direction: current_direction,
+                                      sort_param: sort_param, direction_param: direction_param %>
+            <% end %>
+            <%= helpers.sortable_th helpers.t("inventories.category"), "category",
+                                    current_sort: current_sort, current_direction: current_direction,
+                                    sort_param: sort_param, direction_param: direction_param %>
+            <%= helpers.sortable_th helpers.t("inventories.items_count"), "items_count",
+                                    current_sort: current_sort, current_direction: current_direction,
+                                    sort_param: sort_param, direction_param: direction_param %>
+            <%= helpers.sortable_th helpers.t("inventories.updated"), "updated_at",
+                                    current_sort: current_sort, current_direction: current_direction,
+                                    sort_param: sort_param, direction_param: direction_param %>
+            <% if manage_actions? %><th scope="col"><%= helpers.t("access.actions") %></th><% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% inventories.each do |inventory| %>
+            <tr>
+              <td><%= helpers.link_to inventory.title, helpers.inventory_path(inventory), class: "fw-semibold" %></td>
+              <% if show_creator? %>
+                <td><%= inventory.creator.name %></td>
+              <% end %>
+              <td><%= inventory.category.name %></td>
+              <td><%= inventory.items_count %></td>
+              <td><%= helpers.l(inventory.updated_at, format: :short) %></td>
+              <% if manage_actions? %>
+                <td class="text-nowrap">
+                  <%= helpers.link_to helpers.t("common.edit"), helpers.edit_inventory_path(inventory),
+                                      class: "link-primary me-2" %>
+                  <%= helpers.link_to helpers.t("common.delete"), helpers.inventory_path(inventory),
+                                      class: "link-danger",
+                                      data: { method: "delete", confirm: helpers.t("inventories.delete_confirm") } %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="card-body text-body-secondary"><%= empty_text %></div>
+  <% end %>
+</section>

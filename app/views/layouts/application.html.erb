@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>" data-bs-theme="<%= current_theme %>">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="application-name" content="<%= t("app_name") %>">
+    <title><%= content_for(:title) ? "#{content_for(:title)} · #{t('app_name')}" : t("app_name") %></title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "bootstrap.min", "tom-select.bootstrap5.min", "glightbox.min", "application", media: "all" %>
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <%= yield :head %>
+  </head>
+  <body class="d-flex flex-column min-vh-100 bg-body">
+    <%= render "layouts/icons" %>
+    <%= render "layouts/header" %>
+    <main class="container py-4 flex-grow-1">
+      <%= render "layouts/flash" %>
+      <%= yield %>
+    </main>
+    <%= javascript_include_tag "rails-ujs", "bootstrap.bundle.min", "tom-select.complete.min", "Sortable.min", "glightbox.min", "stimulus", "stimulus_setup", "application" %>
+    <%= yield :scripts %>
+  </body>
+</html>

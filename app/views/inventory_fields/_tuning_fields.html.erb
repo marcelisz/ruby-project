@@ -1,0 +1,45 @@
+<% prefix = local_assigns.fetch(:id_prefix) { f.object.persisted? ? dom_id(f.object) : "new_inventory_field" } %>
+<div class="col-12">
+  <div class="row g-2">
+    <div class="col-md #{'d-none' unless f.object.number_field?}"
+         data-field-tuning-field data-field-types="number">
+      <%= f.label :min_value, t("fields.min_value"), for: "#{prefix}_min_value", class: "form-label" %>
+      <%= f.number_field :min_value, id: "#{prefix}_min_value", step: "any", class: "form-control" %>
+    </div>
+
+    <div class="col-md #{'d-none' unless f.object.number_field?}"
+         data-field-tuning-field data-field-types="number">
+      <%= f.label :max_value, t("fields.max_value"), for: "#{prefix}_max_value", class: "form-label" %>
+      <%= f.number_field :max_value, id: "#{prefix}_max_value", step: "any", class: "form-control" %>
+    </div>
+
+    <div class="col-md #{'d-none' unless f.object.text_field? || f.object.number_field?}"
+         data-field-tuning-field data-field-types="single_line_text multi_line_text number">
+      <label class="form-label" for="<%= prefix %>_min_length">
+        <span data-field-tuning-label data-field-types="single_line_text multi_line_text"
+              class="<%= 'd-none' unless f.object.text_field? %>"><%= t("fields.min_length") %></span>
+        <span data-field-tuning-label data-field-types="number"
+              class="<%= 'd-none' unless f.object.number_field? %>"><%= t("fields.min_digits") %></span>
+      </label>
+      <%= f.number_field :min_length, id: "#{prefix}_min_length", min: 0, step: 1, class: "form-control" %>
+    </div>
+
+    <div class="col-md #{'d-none' unless f.object.text_field? || f.object.number_field?}"
+         data-field-tuning-field data-field-types="single_line_text multi_line_text number">
+      <label class="form-label" for="<%= prefix %>_max_length">
+        <span data-field-tuning-label data-field-types="single_line_text multi_line_text"
+              class="<%= 'd-none' unless f.object.text_field? %>"><%= t("fields.max_length") %></span>
+        <span data-field-tuning-label data-field-types="number"
+              class="<%= 'd-none' unless f.object.number_field? %>"><%= t("fields.max_digits") %></span>
+      </label>
+      <%= f.number_field :max_length, id: "#{prefix}_max_length", min: 0, step: 1, class: "form-control" %>
+    </div>
+
+    <div class="col-md #{'d-none' unless f.object.text_field?}"
+         data-field-tuning-field data-field-types="single_line_text multi_line_text">
+      <%= f.label :regex_pattern, t("fields.regex_pattern"), for: "#{prefix}_regex_pattern", class: "form-label" %>
+      <%= f.text_field :regex_pattern, id: "#{prefix}_regex_pattern", maxlength: 1000,
+                       class: "form-control", placeholder: "^[A-Z]{3}$" %>
+    </div>
+  </div>
+</div>

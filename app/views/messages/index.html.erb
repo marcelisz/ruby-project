@@ -1,0 +1,33 @@
+<% content_for :title, "#{@inventory.title} · #{t('tabs.chat')}" %>
+<%= render "inventories/header", inventory: @inventory %>
+<%= render "inventories/tabs", inventory: @inventory, active: :chat %>
+
+<% if user_signed_in? %>
+  <div class="card mb-4">
+    <div class="card-body">
+      <%= form_with url: chat_inventory_path(@inventory), method: :post, local: true do %>
+        <div class="mb-2">
+          <%= label_tag "message_content", t("chat.new_post"), class: "form-label" %>
+          <%= text_area_tag "message[content]", nil, id: "message_content", rows: 3,
+                            class: "form-control", required: true, maxlength: 5000,
+                            placeholder: t("chat.placeholder") %>
+        </div>
+        <%= submit_tag t("chat.post"), class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="alert alert-secondary">
+    <%= t("chat.login_to_post") %>
+    <%= link_to t("header.log_in"), new_user_session_path %>
+  </div>
+<% end %>
+
+<div data-chat data-feed-url="<%= chat_feed_inventory_path(@inventory) %>" data-last-id="<%= @last_message_id %>">
+  <div data-chat-messages>
+    <% if @messages.empty? %>
+      <p class="text-body-secondary" data-chat-empty><%= t("chat.empty") %></p>
+    <% end %>
+    <%= render "messages/posts", messages: @messages %>
+  </div>
+</div>

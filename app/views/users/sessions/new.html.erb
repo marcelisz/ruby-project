@@ -1,0 +1,23 @@
+<% content_for :title, t("auth.title") %>
+<div class="row justify-content-center">
+  <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+    <div class="card shadow-sm">
+      <div class="card-body p-4 p-md-5">
+        <div class="d-flex align-items-center gap-2 mb-3">
+          <%= icon("box", size: 32) %>
+          <h1 class="h4 mb-0"><%= t("app_name") %></h1>
+        </div>
+        <p class="text-body-secondary"><%= t("auth.intro") %></p>
+        <div class="d-grid gap-2">
+          <% Devise.omniauth_configs.each_key do |provider| %>
+            <%= button_to oauth_path(provider), method: :post, class: "btn btn-outline-secondary btn-lg w-100",
+                          data: { turbo: false } do %>
+              <%= t("auth.continue_with", provider: provider_name(provider)) %>
+            <% end %>
+          <% end %>
+        </div>
+        <p class="small text-body-secondary mb-0 mt-4"><%= t("auth.registration_note") %></p>
+      </div>
+    </div>
+  </div>
+</div>

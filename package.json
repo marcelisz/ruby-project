@@ -1,0 +1,18 @@
+{
+  "name": "projekt",
+  "version": "1.0.0",
+  "description": "A Ruby on Rails inventory application with user-defined inventories and custom fields. Users can track office equipment, library books, HR documents, or any other collection; each inventory defines its own field schema and custom item ID format.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "dependencies": {
+    "playwright-core": "^1.64.1"
+  }
+}

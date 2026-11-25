@@ -1,0 +1,380 @@
+en:
+  app_name: "Inventory Management"
+  languages:
+    en: English
+    pl: Polski
+  roles:
+    admin: Administrator
+    user: User
+  common:
+    add: Add
+    cancel: Cancel
+    close: Close
+    delete: Delete
+    edit: Edit
+    errors:
+      one: "Please fix the following error:"
+      other: "Please fix the following errors:"
+    help: Help
+    no_description: "No description"
+    none: "Not set"
+    "no": "No"
+    save: Save
+    deleted_user: "Deleted user"
+    "yes": "Yes"
+  auth:
+    title: "Log in"
+    intro: "Log in or create an account with one of the providers below."
+    registration_note: "An account is created automatically the first time you log in."
+    continue_with: "Continue with %{provider}"
+    providers:
+      google_oauth2: Google
+      facebook: Facebook
+      github: GitHub
+    failure: "Authentication failed. Please try again."
+    blocked: "Your account has been blocked."
+    success: "Signed in successfully."
+    signed_out: "Signed out successfully."
+  header:
+    search: Search
+    search_placeholder: "Search inventories, items and users"
+    settings: Settings
+    language: Language
+    dark_mode: Dark mode
+    profile: Profile
+    admin_dashboard: "Admin dashboard"
+    log_out: "Log out"
+    log_in: "Log in"
+  home:
+    title: Home
+    latest: "Latest inventories"
+    view_all: "View all inventories"
+    no_inventories: "No inventories have been created yet."
+    popular: "Top 5 most popular inventories"
+    tags: "Popular tags"
+    no_tags: "No tags yet."
+  inventories:
+    index_title: Inventories
+    name: Name
+    title: Title
+    description: Description
+    category: Category
+    creator: Creator
+    created_by: "Created by"
+    created: Created
+    updated: Updated
+    items_count: Items
+    items_count_value:
+      one: "%{count} item"
+      other: "%{count} items"
+    total:
+      one: "%{count} inventory"
+      other: "%{count} inventories"
+    add: "Add inventory"
+    new_title: "New inventory"
+    create: "Create inventory"
+    empty: "No inventories have been created yet."
+    public: Public
+    private: Private
+    tags: Tags
+    tags_placeholder: "Add tags..."
+    image: Image
+    upload_image: "Upload image"
+    upload_unavailable: "Image upload is unavailable. Please paste an image URL instead."
+    delete_confirm: "Delete this inventory and all of its items?"
+  tabs:
+    items: Items
+    chat: Chat
+    settings: Settings
+    custom_id: "Custom ID"
+    fields: Fields
+    access: Access
+    stats: Stats
+    export: Export
+  autosave:
+    saving: "Saving..."
+    saved: Saved
+    error: "Changes could not be saved."
+    conflict: "This inventory was changed by someone else. Reload the page before saving again."
+  settings:
+    title: "Inventory settings"
+    delete_title: "Delete inventory"
+    delete_hint: "This permanently deletes the inventory, its items and its chat."
+    delete: "Delete inventory"
+    delete_confirm: "Delete this inventory and all of its items?"
+  export:
+    title: "Export inventory"
+    intro: "Download all inventory items and their custom field values as a spreadsheet or CSV file."
+    download_xlsx: "Download XLSX"
+    download_csv: "Download CSV"
+    sheet_name: Items
+    headers:
+      custom_id: "Custom ID"
+      created_by: "Created by"
+      created_at: "Created at"
+      likes: Likes
+  items:
+    total:
+      one: "%{count} item"
+      other: "%{count} items"
+    add: "Add item"
+    delete: "Delete selected"
+    select_all: "Select all items"
+    custom_id: "Custom ID"
+    custom_id_hint: "Leave blank to generate an ID automatically, for example %{example}."
+    created_by: "Created by"
+    created_at: "Created at"
+    likes: Likes
+    likes_count:
+      one: "%{count} like"
+      other: "%{count} likes"
+    like: Like
+    liked: Liked
+    empty: "No items in this inventory yet."
+    new_title: "New item"
+    delete_confirm: "Delete the selected items?"
+    no_fields: "This inventory has no custom fields yet."
+    back_to_inventory: "Back to inventory"
+  fields:
+    title: Fields
+    limits: "Up to 3 fields of each type. Drag fields by their handle to reorder them."
+    title_label: Title
+    type: Type
+    description: Description
+    show_in_table: "Show in table"
+    min_length: "Minimum length"
+    max_length: "Maximum length"
+    min_digits: "Minimum digits"
+    max_digits: "Maximum digits"
+    min_value: "Minimum value"
+    max_value: "Maximum value"
+    regex_pattern: "Regular expression"
+    add: "Add field"
+    new_field: "New field"
+    drag: "Drag to reorder"
+    position: "Position %{position}"
+    delete_confirm: "Delete this field? Existing item values are kept in storage but hidden."
+    usage: "Field limits"
+    used:
+      one: "%{count} of %{limit}"
+      other: "%{count} of %{limit}"
+    types:
+      single_line_text: "Single-line text"
+      multi_line_text: "Multi-line text"
+      number: Number
+      document: "Document/image link"
+      image: Image
+      boolean: "True/false"
+  custom_id:
+    title: "Custom ID format"
+    intro: "Build the ID format for items in this inventory. Each new item receives a generated ID; you can still edit it on the item form."
+    help_title: "How custom IDs work"
+    help_text: "Elements are concatenated from left to right. Drag cards to reorder them, or drag a card outside the list to remove it. The example is only a preview; the real ID is generated when an item is created."
+    live_example: "Live example"
+    add_element: "Add element"
+    text: "Fixed text"
+    padding: "Padding (digits)"
+    format: "Date/time format"
+    drag: "Drag to reorder"
+    example: Example
+    types:
+      text: "Fixed text"
+      random20: "20-bit random number"
+      random32: "32-bit random number"
+      random6: "6-digit random number"
+      random9: "9-digit random number"
+      guid: GUID
+      datetime: "Date/time of creation"
+      sequence: Sequence
+    help:
+      text: "Any fixed Unicode text, for example LAP-."
+      random20: "A random number from 0 to 1,048,575. Padding adds leading zeros; the number is never truncated."
+      random32: "A random number from 0 to 4,294,967,295. Padding adds leading zeros; the number is never truncated."
+      random6: "A random number from 000000 to 999999."
+      random9: "A random number from 000000000 to 999999999."
+      guid: "A random universally unique identifier (UUID)."
+      datetime: "The creation date and time. Supported tokens: %Y, %y, %m, %d, %H, %M, %S and %% for a literal percent sign."
+      sequence: "The largest sequence value in this inventory plus one. Padding adds leading zeros."
+  access:
+    public_title: "Visibility and access"
+    public: "Public inventory"
+    public_hint: "In a public inventory, any signed-in user can add, edit and delete items. Only the creator and admins can change the inventory."
+    add_user: "Add a user"
+    user: User
+    autocomplete_placeholder: "Type a username or e-mail"
+    list_title: "Users with access"
+    sort_by_name: "By name"
+    sort_by_email: "By e-mail"
+    name: Name
+    email: E-mail
+    actions: Actions
+    remove: "Remove access"
+    remove_confirm: "Remove this user's access to the inventory?"
+    empty: "No users have been granted access yet."
+  stats:
+    title: "Inventory statistics"
+    items: Items
+    likes: Likes
+    entries: "Values entered"
+    average: Average
+    minimum: Minimum
+    maximum: Maximum
+    links_provided:
+      one: "%{count} link provided"
+      other: "%{count} links provided"
+    images_provided:
+      one: "%{count} image provided"
+      other: "%{count} images provided"
+    no_values: "No values entered yet."
+    no_fields: "Add custom fields to see statistics for their values."
+  search:
+    title: "Search"
+    results_for: "Results for “%{query}”"
+    no_results: "No results found."
+    inventories: Inventories
+    items: Items
+    users: Users
+  tags:
+    inventories:
+      one: "%{count} inventory with this tag"
+      few: "%{count} inventories with this tag"
+      other: "%{count} inventories with this tag"
+  chat:
+    new_post: "New post"
+    placeholder: "Write a message."
+    post: "Publish"
+    empty: "No posts yet. Start the conversation."
+    login_to_post: "Log in to join the conversation."
+  profile:
+    owned: "Inventories I own"
+    owned_by: "Inventories owned by %{name}"
+    shared_me: "Inventories shared with me"
+    shared_by: "Inventories shared with %{name}"
+    filter: "Filter by name or description"
+    filter_action: Filter
+    no_owned: "This user does not own any inventories."
+    no_owned_me: "You do not own any inventories."
+    no_shared: "No inventories are shared with this user."
+    no_shared_me: "No inventories have been shared with you."
+  admin:
+    title: "Admin dashboard"
+    name: Name
+    email: E-mail
+    role: Role
+    status: Status
+    actions: Actions
+    active: Active
+    blocked: Blocked
+    block: Block
+    unblock: Unblock
+    make_admin: "Make admin"
+    remove_admin: "Remove admin"
+    delete_confirm: "Delete this user and all inventories they own?"
+    users:
+      blocked: "The user has been blocked."
+      unblocked: "The user has been unblocked."
+      role_updated: "The user's role has been updated."
+      deleted: "The user has been deleted."
+  flash:
+    not_authorized: "You are not allowed to perform this action."
+    inventory_created: "Inventory created."
+    inventory_updated: "Inventory updated."
+    inventory_deleted: "Inventory deleted."
+    item_created: "Item created."
+    item_updated: "Item updated."
+    no_items_selected: "No items were selected."
+    items_deleted:
+      one: "%{count} item deleted."
+      few: "%{count} items deleted."
+      other: "%{count} items deleted."
+    fields_updated: "Fields updated."
+    custom_id_updated: "Custom ID format updated."
+    access_updated: "Access settings updated."
+    user_not_found: "User not found."
+    access_added: "User added to the access list."
+    already_has_access: "The user already has access."
+    access_removed: "User removed from the access list."
+    message_created: "Post published."
+    liked: "Item liked."
+    already_liked: "You already liked this item."
+    conflict: "The record was changed by someone else. Reload the page and try again."
+  devise:
+    failure:
+      unauthenticated: "Please log in to continue."
+      already_authenticated: "You are already signed in."
+      blocked: "Your account has been blocked."
+      invalid: "Invalid e-mail or password."
+      timeout: "Your session expired. Please log in again."
+  activerecord:
+    models:
+      category: Category
+      inventory: Inventory
+      inventory_field: Field
+      item: Item
+      message: Post
+      user: User
+    attributes:
+      user:
+        name: Username
+        email: E-mail
+      inventory:
+        title: Title
+        description: Description
+        category: Category
+        image_url: Image
+        custom_id_format: "Custom ID format"
+      inventory_field:
+        title: Title
+        description: Description
+        field_type: "Field type"
+        show_in_table: "Show in table"
+        min_length: "Minimum length"
+        max_length: "Maximum length"
+        min_value: "Minimum value"
+        max_value: "Maximum value"
+        regex_pattern: "Regular expression"
+      item:
+        custom_id: "Custom ID"
+        field_values: Fields
+      message:
+        content: Post
+    errors:
+      models:
+        inventory:
+          attributes:
+            custom_id_format:
+              blank: "must contain at least one element"
+              too_many_elements: "cannot contain more than %{max} elements"
+              invalid_type: "element %{index} has an unsupported type"
+              blank_text: "element %{index} requires fixed text"
+              invalid_padding: "element %{index} requires padding between %{min} and %{max}"
+              invalid_datetime: "element %{index} has an unsupported date format"
+              invalid: "is invalid"
+        inventory_field:
+          attributes:
+            field_type:
+              limit_reached: "cannot exceed %{limit} fields of this type"
+            max_length:
+              must_be_greater_than_or_equal_to_min_length: "must be greater than or equal to the minimum length"
+            max_value:
+              must_be_greater_than_or_equal_to_min_value: "must be greater than or equal to the minimum value"
+            regex_pattern:
+              invalid_database_pattern: "is not supported by the database"
+        item:
+          attributes:
+            custom_id:
+              invalid_format: "does not match this inventory's custom ID format"
+              inventory_format_invalid: "cannot be validated because the inventory's custom ID format is invalid"
+            field_values:
+              invalid_number: "contains an invalid number in field %{field}"
+              too_short: "contains text shorter than %{limit} characters in field %{field}"
+              too_long: "contains text longer than %{limit} characters in field %{field}"
+              invalid_text_format: "contains text that does not match the required format in field %{field}"
+              too_few_digits: "contains a number with fewer than %{limit} digits in field %{field}"
+              too_many_digits: "contains a number with more than %{limit} digits in field %{field}"
+              below_minimum: "contains a value below %{limit} in field %{field}"
+              above_maximum: "contains a value above %{limit} in field %{field}"
+  time:
+    formats:
+      short: "%Y-%m-%d %H:%M"
+      long: "%Y-%m-%d %H:%M:%S"
